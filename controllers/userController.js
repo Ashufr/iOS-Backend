@@ -61,7 +61,7 @@ const addItemToStorage = async (req, res) => {
     }
 };
 
-const addMultiple = async (req, res) => {
+const addMultipleItems = async (req, res) => {
     const { userId } = req.params;
     const { storageId, allStorageId, items } = req.body;
 
@@ -89,4 +89,4 @@ const addMultiple = async (req, res) => {
     }
 };
 
-export { createUser, getUsers, getUser, addItemToStorage };
+export { createUser, getUsers, getUser, addItemToStorage, addMultipleItems };
