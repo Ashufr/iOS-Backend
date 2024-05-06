@@ -15,7 +15,7 @@ const getUser = async (req, res) => {
 
 const createUser = async (req, res) => {
     const user = req.body;
-    
+
     const newUser = new userModel(user);
     await newUser.save();
     res.status(201).json(newUser);
@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
 const addItemToStorage = async (req, res) => {
     const { userId } = req.params;
     try {
-        const { storageId, allStorageId, item} = req.body;
+        const { storageId, allStorageId, item } = req.body;
 
         // Find the user by their ID
         const user = await userModel.findById(userId);
@@ -57,6 +57,34 @@ const addItemToStorage = async (req, res) => {
             .json({ message: "Item added to storage successfully" });
     } catch (error) {
         console.error("Error adding item to storage:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+const addMultiple = async (req, res) => {
+    const { userId } = req.params;
+    const { storageId, allStorageId, items } = req.body;
+
+    const storage = await storageModel.findById(storageId);
+    const allStorage = await storageModel.findById(allStorageId);
+    try {
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        if (!storage || !allStorage) {
+            return res.status(404).json({ error: "Storage not found" });
+        }
+        for (const item of items) {
+            const newItem = new itemModel(item);
+            await newItem.save();
+            storage.items.push(newItem);
+            allStorage.items.push(newItem);
+        }
+        await user.save();
+        return res.status(200).json({ message: "Items added successfully" });
+    } catch (error) {
+        console.error("Error adding items:", error);
         return res.status(500).json({ error: "Internal server error" });
     }
 };
