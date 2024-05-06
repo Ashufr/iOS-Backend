@@ -88,4 +88,44 @@ const updateHousehold = async (req, res) => {
     }
 }
 
-export default { createHousehold, getHousehold, getHouseholds, updateHousehold }
+
+const setupStorage = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const household = await householdModel.findById(id);
+        if (!household) {
+            return res.status(404).json({ message: "Household not found" });
+        }
+        const pantry = new storageModel({ 
+            name: "Pantry",
+            items: [],
+        })  
+        const fridge = new storageModel({ 
+            name: "Fridge",
+            items: [],
+        })  
+        const freezer = new storageModel({
+            name: "Freezer",
+            items: [],
+        }) 
+        const shelf = new storageModel({
+            name: "Shelf",
+            items: [],
+        })
+        const all = new storageModel({
+            name: "All",
+            items: [],
+        })
+        pantry.save();
+        fridge.save();
+        freezer.save();
+        shelf.save();
+        all.save();
+        household.storages = [pantry, fridge, freezer, shelf, all];
+        await household.save();
+        res.status(200).json(household);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+export default { createHousehold, getHousehold, getHouseholds, setupStorage, updateHousehold }

@@ -18,4 +18,5 @@ const createStorage = async (req, res) => {
     res.status(201).json(newStorage);
 }
 
+
 export { getStorages, getStorage, createStorage }
