@@ -164,7 +164,7 @@ const addItemToStorage = async (req, res) => {
             .json({ message: "Item added to storage successfully" });
     } catch (error) {
         console.error("Error adding item to storage:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        return res.status(500).json({ error: error + "Internal server error" });
     }
 };
 
@@ -194,7 +194,7 @@ const addMultipleItems = async (req, res) => {
         return res.status(200).json({ message: "Items added successfully" });
     } catch (error) {
         console.error("Error adding items:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        return res.status(500).json({ error: error + "Internal server error" });
     }
 };
 
