@@ -143,12 +143,12 @@ const addItemToStorage = async (req, res) => {
 
         const storage = null;
         const allStorage = null;
-        for (const storage of household.storages) {
-            if (storage._id.toString() === storageId) {
-                storage;
+        for (const str of household.storages) {
+            if (str._id.toString() === storageId) {
+                storage = str;
             }
-            if (storage._id.toString() === allStorageId) {
-                allStorage;
+            if (str._id.toString() === allStorageId) {
+                allStorage = str;
             }
         }
         if (!storage || !allStorage) {
@@ -189,12 +189,12 @@ const addMultipleItems = async (req, res) => {
 
         const storage = null;
         const allStorage = null;
-        for (const storage of household.storages) {
-            if (storage._id.toString() === storageId) {
-                storage;
+        for (const str of household.storages) {
+            if (str._id.toString() === storageId) {
+                storage = str;
             }
-            if (storage._id.toString() === allStorageId) {
-                allStorage;
+            if (str._id.toString() === allStorageId) {
+                allStorage = str;
             }
         }
         if (!storage || !allStorage) {
