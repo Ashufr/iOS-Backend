@@ -201,6 +201,7 @@ const addMultipleItems = async (req, res) => {
             return res.status(404).json({ error: "Storage not found" });
         }
         for (const item of items) {
+            item.storage = storage.name;
             const newItem = new itemModel(item);
             await newItem.save();
             storage.items.push(newItem);
