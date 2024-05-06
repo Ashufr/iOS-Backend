@@ -1,5 +1,6 @@
 import householdModel from "../models/householdModel.js";
 import storageModel from "../models/storageModal.js";
+import itemModel from "../models/itemModal.js";
 
 const createHousehold = async (req, res) => {
     const { name, code } = req.body;
