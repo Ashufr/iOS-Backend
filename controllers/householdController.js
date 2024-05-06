@@ -130,12 +130,12 @@ const setupStorage = async (req, res) => {
 }
 
 const addItemToStorage = async (req, res) => {
-    const { householdId } = req.params;
+    const { id } = req.params;
     try {
         const { storageId, allStorageId, item } = req.body;
 
         // Find the user by their ID
-        const household = await householdModel.findById(householdId);
+        const household = await householdModel.findById(id);
         if (!household) {
             return res.status(404).json({ error: "Household not found" });
         }
@@ -168,12 +168,12 @@ const addItemToStorage = async (req, res) => {
 };
 
 const addMultipleItems = async (req, res) => {
-    const { householdId } = req.params;
+    const { id } = req.params;
     const { storageId, allStorageId, items } = req.body;
 
 
     try {
-        const household = await householdModel.findById(householdId);
+        const household = await householdModel.findById(id);
         if (!household) {
             return res.status(404).json({ error: "Household not found" });
         }
