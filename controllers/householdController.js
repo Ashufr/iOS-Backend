@@ -57,6 +57,15 @@ const getHousehold = async (req, res) => {
     }
 }
 
+const getHouseholds = async (req, res) => {
+    try {
+        const households = await householdModel.find();
+        res.status(200).json(households);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 const updateHousehold = async (req, res) => {
     const { id } = req.params;
     const { name, code } = req.body;
