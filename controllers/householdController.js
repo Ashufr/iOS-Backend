@@ -136,13 +136,21 @@ const addItemToStorage = async (req, res) => {
         const { storageId, allStorageId, item } = req.body;
 
         // Find the user by their ID
-        const household = await householdModel.findById(id);
+        const household = await householdModel.findById(id).populate("storages");
         if (!household) {
             return res.status(404).json({ error: "Household not found" });
         }
 
-        const storage = await household.storages.findById(storageId);
-        const allStorage = await household.storages.findById(allStorageId);
+        const storage = null;
+        const allStorage = null;
+        for (const storage of household.storages) {
+            if (storage._id.toString() === storageId) {
+                storage;
+            }
+            if (storage._id.toString() === allStorageId) {
+                allStorage;
+            }
+        }
         if (!storage || !allStorage) {
             return res.status(404).json({ error: "Storage not found" });
         }
@@ -179,8 +187,16 @@ const addMultipleItems = async (req, res) => {
             return res.status(404).json({ error: "Household not found" });
         }
 
-        const storage = await household.storages.findById(storageId);
-        const allStorage = await household.storages.findById(allStorageId);
+        const storage = null;
+        const allStorage = null;
+        for (const storage of household.storages) {
+            if (storage._id.toString() === storageId) {
+                storage;
+            }
+            if (storage._id.toString() === allStorageId) {
+                allStorage;
+            }
+        }
         if (!storage || !allStorage) {
             return res.status(404).json({ error: "Storage not found" });
         }
