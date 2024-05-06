@@ -155,7 +155,7 @@ const addItemToStorage = async (req, res) => {
             return res.status(404).json({ error: "Storage not found" });
         }
 
-        // Create a new item based on the item data received
+        item.storage = storage.name;
         const newItem = new itemModel(item);
 
         // Save the item to the database

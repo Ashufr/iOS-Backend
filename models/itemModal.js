@@ -9,10 +9,6 @@ const itemSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    description: {
-        type: String,
-        required: true
-    },
     storage: {
         type: String,
         required: true
