@@ -88,4 +88,4 @@ const updateHousehold = async (req, res) => {
     }
 }
 
-export default { createHousehold, getHousehold, updateHousehold }
+export default { createHousehold, getHousehold, getHouseholds, updateHousehold }
