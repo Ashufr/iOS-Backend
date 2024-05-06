@@ -9,8 +9,8 @@ router.get("/", getHouseholds)
 .get("/:id", getHousehold)
 .post("/:id", updateHousehold)
 .post("/:id/setupstorage", setupStorage)
-.post("/:id/storage", addItemToStorage)
-.post("/:id/storage/multiple", addMultipleItems);
+.post("/:id/storage/add", addItemToStorage)
+.post("/:id/storage/addmultiple", addMultipleItems);
 
 
 export default router
