@@ -182,7 +182,7 @@ const addMultipleItems = async (req, res) => {
 
 
     try {
-        const household = await householdModel.findById(id);
+        const household = await householdModel.findById(id).populate("storages");
         if (!household) {
             return res.status(404).json({ error: "Household not found" });
         }
@@ -192,9 +192,11 @@ const addMultipleItems = async (req, res) => {
         for (const str of household.storages) {
             if (str._id.toString() === storageId) {
                 storage = str;
+                console.log(storage);
             }
             if (str._id.toString() === allStorageId) {
                 allStorage = str;
+                console.log(allStorage);
             }
         }
         if (!storage || !allStorage) {
@@ -202,13 +204,16 @@ const addMultipleItems = async (req, res) => {
         }
         for (const item of items) {
             item.storage = storage.name;
+            console.log(storage.name)
             const newItem = new itemModel(item);
             await newItem.save();
             storage.items.push(newItem);
             allStorage.items.push(newItem);
         }
-        await user.save();
-        return res.status(200).json({ message: "Items added successfully" });
+
+        await storage.save();
+        await allStorage.save();
+        return res.status(200).json({ message: "Items added to " + storage.name + " successfully" });
     } catch (error) {
         console.error("Error adding items:", error);
         return res.status(500).json({ error: error + "Internal server error" });
