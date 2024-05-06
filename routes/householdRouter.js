@@ -8,7 +8,7 @@ router.get("/", getHouseholds)
 .post("/", createHousehold)
 .get("/:id", getHousehold)
 .post("/:id", updateHousehold)
-.post("/:id/storage", setupStorage)
+.post("/:id/setupstorage", setupStorage)
 .post("/:id/storage", addItemToStorage)
 .post("/:id/storage/multiple", addMultipleItems);
 
