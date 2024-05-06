@@ -141,8 +141,8 @@ const addItemToStorage = async (req, res) => {
             return res.status(404).json({ error: "Household not found" });
         }
 
-        const storage = null;
-        const allStorage = null;
+        var storage = null;
+        var allStorage = null;
         for (const str of household.storages) {
             if (str._id.toString() === storageId) {
                 storage = str;
@@ -187,8 +187,8 @@ const addMultipleItems = async (req, res) => {
             return res.status(404).json({ error: "Household not found" });
         }
 
-        const storage = null;
-        const allStorage = null;
+        var storage = null;
+        var allStorage = null;
         for (const str of household.storages) {
             if (str._id.toString() === storageId) {
                 storage = str;
