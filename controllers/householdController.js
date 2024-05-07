@@ -66,7 +66,7 @@ const getHousehold = async (req, res) => {
 
 const getHouseholds = async (req, res) => {
     try {
-        const household = await householdModel.find().populate({
+        const households = await householdModel.find().populate({
             path: 'storages',
             populate: {
                 path: 'items'
