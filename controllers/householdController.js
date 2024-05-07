@@ -48,7 +48,13 @@ const createHousehold = async (req, res) => {
 const getHousehold = async (req, res) => {
     const { id } = req.params;
     try {
-        const household = await householdModel.findById(id);
+        const household = await householdModel.findById(id).populate({
+            path: 'storages',
+            populate: {
+                path: 'items'
+            }
+        });
+
         if (!household) {
             return res.status(404).json({ message: "Household not found" });
         }
@@ -60,7 +66,12 @@ const getHousehold = async (req, res) => {
 
 const getHouseholds = async (req, res) => {
     try {
-        const households = await householdModel.find();
+        const household = await householdModel.findById(id).populate({
+            path: 'storages',
+            populate: {
+                path: 'items'
+            }
+        });
         res.status(200).json(households);
     } catch (error) {
         res.status(500).json({ message: error.message });
