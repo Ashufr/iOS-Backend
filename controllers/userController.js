@@ -29,6 +29,7 @@ const changeHousehold = async (req, res) => {
     const user = await userModal(id);
     user.household = householdId
     await user.save();
+    res.status(200).json(user.name + " household chnage to" + user.household);
 }
 
 
