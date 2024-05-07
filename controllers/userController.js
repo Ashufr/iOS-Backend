@@ -1,6 +1,7 @@
 import userModel from "../models/userModel.js";
 import storageModel from "../models/storageModal.js";
 import itemModel from "../models/itemModal.js";
+import householdModel from "../models/householdModal.js";
 
 const getUsers = async (req, res) => {
     const users = await userModel.find();
@@ -21,6 +22,14 @@ const createUser = async (req, res) => {
     res.status(201).json(newUser);
 };
 
+const changeHousehold = async (req, res) => {
+    const { id } = req.params;
+    const householdId = req.body;
+
+    const user = await userModal(id);
+    user.household = householdId
+    await user.save();
+}
 
 
-export { createUser, getUsers, getUser };
+export { createUser, getUsers, getUser, changeHousehold };
