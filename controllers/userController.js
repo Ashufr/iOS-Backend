@@ -24,9 +24,10 @@ const createUser = async (req, res) => {
 
 const changeHousehold = async (req, res) => {
     const { id } = req.params;
-    const householdId = req.body;
+    console.log("adsjfalkdsjf;lasdjf=> ",req.body)
+    const {householdId} = req.body;
 
-    const user = await userModal.findById(id);
+    const user = await userModel.findById(id);
     user.household = householdId
     await user.save();
     res.status(200).json(user);
