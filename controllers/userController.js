@@ -1,7 +1,7 @@
 import userModel from "../models/userModel.js";
 import storageModel from "../models/storageModal.js";
 import itemModel from "../models/itemModal.js";
-import householdModel from "../models/householdModal.js";
+import householdModel from "../models/householdModel.js";
 
 const getUsers = async (req, res) => {
     const users = await userModel.find();
