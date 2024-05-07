@@ -26,7 +26,7 @@ const changeHousehold = async (req, res) => {
     const { id } = req.params;
     const householdId = req.body;
 
-    const user = await userModal(id);
+    const user = await userModal.findById(id);
     user.household = householdId
     await user.save();
     res.status(200).json(user);
